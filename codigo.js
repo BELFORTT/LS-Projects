@@ -18,48 +18,39 @@ class Exam {
                 total += this.peso[questao]
             }
         }
-        return total 
+        return total
     }
  
     avg() {
-        const nota = this.exam.reduce((soma, respostas) => soma + this.corrigir(respostas), 0)
-        return nota
+        if (this.exam.length === 0) return 0; 
+        const nota = this.exam.reduce((soma, respostas) => soma + this.corrigir(respostas), 0);
+        return nota / this.exam.length;
     }
 
     min(minima) {
-        const nota = this.exam.map(respostas => this.corrigir(respostas));
-        if (nota.some(nota => nota === minima)){
-            return "Atingiu a mota mínima"
-        }
-
-        else if (nota.some(nota => nota != minima)){
-            return "Nota superior a mínima"
-        }
+        const notas = this.exam.map(respostas => this.corrigir(respostas));  
+        const minimas = notas.filter(nota => nota === minima);  
+        return minimas;
     }
 
     max(maxima) {
-        const nota = this.exam.map(respostas => this.corrigir(respostas));
-        if (nota.some(nota => nota === maxima)){
-            return `Atingiu a nota máxima ${maxima}`
-        }
-        else if (nota.some(nota => nota != maxima)){
-            return `Não atingiu a nota máxima`
-        }
+        const notas = this.exam.map(respostas => this.corrigir(respostas));  
+        const maximas = notas.filter(nota => nota === maxima);  
+        return maximas
+        
 
     }
 
     lt(valor) {
-        const nota = this.exam.map(respostas => this.corrigir(respostas));
-        if (nota.some(nota => nota > valor)){
-            return `Valor ${valor} definido é menor que a nota ${nota}`
-        }
+        const notas = this.exam.map(respostas => this.corrigir(respostas));
+        const menores = notas.filter(nota => nota < valor);
+        return menores;
     }
 
     gt(valor) {
-        const nota = this.exam.map(respostas => this.corrigir(respostas));
-        if (nota.some(nota => nota < valor)){
-            return `Valor ${valor} definido é maior que a nota ${nota}`
-        }     
+        const notas = this.exam.map(respostas => this.corrigir(respostas));
+        const maiores = notas.filter(nota => nota > valor);
+        return maiores;
     }
  }
  
