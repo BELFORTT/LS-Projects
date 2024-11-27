@@ -5,52 +5,61 @@ class Exam {
         this.exam = []
     }
  
-    add(exam) {
-        this.exam.push(exam)
-        return this.exam
+    add(exame) {
+        this.exam.push(exame);
+        return this.exam;
     }
- 
- 
-    corrigir(exam) {
-        let total = 0
-        for (let questao in this.gabarito){
-            if (exam[questao] === this.gabarito[questao]){
-                total += this.peso[questao]
+
+    corrigir(exame) {
+        let total = 0;
+        for (let questao in this.gabarito) {
+            if (exame[questao] === this.gabarito[questao]) {
+                total += this.peso[questao];
             }
         }
-        return total
+        return total;
     }
  
     avg() {
-        if (this.exam.length === 0) return 0; 
-        const nota = this.exam.reduce((soma, respostas) => soma + this.corrigir(respostas), 0);
+        const nota = this.exam.reduce((acc, resposta) => acc + this.corrigir(resposta), 0);
         return nota / this.exam.length;
     }
 
-    min(minima) {
-        const notas = this.exam.map(respostas => this.corrigir(respostas));  
-        const minimas = notas.filter(nota => nota === minima);  
-        return minimas;
-    }
+    min() {
+        let notas = this.exam.map(respostas => this.corrigir(respostas));
+        let menor = notas[0];
 
-    max(maxima) {
-        const notas = this.exam.map(respostas => this.corrigir(respostas));  
-        const maximas = notas.filter(nota => nota === maxima);  
-        return maximas
+        for (let nota of notas) {
+            if (nota < menor){
+                menor = nota
+            };
+        }
+
+        return notas.filter(nota => nota === menor);
+    }
+    
+
+    max() {
+        let notas = this.exam.map(respostas => this.corrigir(respostas));
+        let maior = notas[0];
+
+        for (let nota of notas) {
+            if (nota > maior) {
+                maior = nota
+            };
+        }
+
+        return notas.filter(nota => nota === maior);
+    }
         
-
-    }
-
     lt(valor) {
-        const notas = this.exam.map(respostas => this.corrigir(respostas));
-        const menores = notas.filter(nota => nota < valor);
-        return menores;
+        const notas = this.exam.map(resposta => this.corrigir(resposta));
+        return notas.filter(nota => nota < valor);
     }
 
     gt(valor) {
-        const notas = this.exam.map(respostas => this.corrigir(respostas));
-        const maiores = notas.filter(nota => nota > valor);
-        return maiores;
+        const notas = this.exam.map(resposta => this.corrigir(resposta));
+        return notas.filter(nota => nota > valor);
     }
  }
  

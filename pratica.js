@@ -12,20 +12,18 @@ const gabarito = {
 const teste = new Exam(peso, gabarito)
 
 
-const e1 = {
-   q1: "a", q2: "b", q3: "a", q4: "c", q5: "d"
-}
+const e1 = { q1: 'a', q2: 'b', q3: 'a', q4: 'c', q5: 'd' }
 
 console.log(teste.add(e1))
 
-console.log(teste.corrigir(e1))
+console.log(teste.avg());
 
-console.log(teste.avg())
+console.log(teste.min());
 
-console.log(teste.min(0))
+console.log(teste.max());
 
-console.log(teste.max(10))
+console.log(teste.lt(4));
 
-console.log(teste.lt(4))
+console.log(teste.gt(8));
 
-console.log(teste.gt(8))
+
